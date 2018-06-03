@@ -4,15 +4,15 @@ import (
 	"encoding/json"
 	"log"
 	"net/http"
-	"github.com/jmbl1685/apirest-go/models"
+	"./models"
 	"github.com/gorilla/mux"
 )
 
-var playerList []Player
+var playerList [] models.Player
 
 func main() {
 
-	player := Player {
+	player := models.Player {
 		Id: "1", 
 		Name: "Lionel Messi", 
 		Team: "Barcelona FC",
