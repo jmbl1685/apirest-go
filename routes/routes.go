@@ -14,7 +14,7 @@ func Routers() (router *mux.Router) {
 	router.HandleFunc("/player", controllers.GetPlayer).Methods("GET")
 	router.HandleFunc("/player/{id}", controllers.GetPlayerById).Methods("GET")
 	router.HandleFunc("/player/{id}", controllers.DeletePlayer).Methods("DELETE")
-	router.HandleFunc("/player/{id}", controllers.UpdatePlayer).Methods("UPDATE")
+	router.HandleFunc("/player/{id}", controllers.UpdatePlayer).Methods("PUT")
 
 	return
 }

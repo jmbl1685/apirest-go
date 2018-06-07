@@ -11,11 +11,11 @@ func GetPort() string {
 func Mongo() *mgo.Collection {
 
 	const (
-		Host       = "HOST_DB"
-		Username   = "USERNAME_DB"
-		Password   = "PASSWORD_DB"
-		Database   = "DATABASE_DB"
-		Collection = "COLLECTION_DB"
+		Host       = "ds046367.mlab.com:46367"
+		Username   = "root"
+		Password   = "12345"
+		Database   = "db-social-mean5"
+		Collection = "player"
 	)
 
 	session, err := mgo.DialWithInfo(&mgo.DialInfo{
@@ -28,8 +28,6 @@ func Mongo() *mgo.Collection {
 	if err != nil {
 		panic(err)
 	}
-
-	defer session.Close()
 
 	return session.DB(Database).C(Collection)
 }
