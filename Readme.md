@@ -3,9 +3,10 @@
 
 Used modules
 ```
+go get github.com/gorilla/mux
+go get github.com/rs/cors
 go get gopkg.in/mgo.v2
 go get gopkg.in/mgo.v2/bson
-go get github.com/gorilla/mux
 go get github.com/jasonsoft/go-short-id
 ```
 
