@@ -1,24 +1,24 @@
 package config
 
 import (
-	"gopkg.in/mgo.v2"
+	mongodb "gopkg.in/mgo.v2"
 )
 
 func GetPort() string {
 	return ":3000"
 }
 
-func Mongo() *mgo.Collection {
+func Mongo() *mongodb.Collection {
 
 	const (
-		Host       = "HOST_DB"
-		Username   = "USERNAME_DB"
-		Password   = "PASSWORD_DB"
-		Database   = "DATABASE_DB"
-		Collection = "COLLECTION_DB"
+		Host       = "ds046367.mlab.com:46367"
+		Username   = "root"
+		Password   = "12345"
+		Database   = "db-social-mean5"
+		Collection = "player"
 	)
 
-	session, err := mgo.DialWithInfo(&mgo.DialInfo{
+	session, err := mongodb.DialWithInfo(&mongodb.DialInfo{
 		Addrs:    []string{Host},
 		Username: Username,
 		Password: Password,

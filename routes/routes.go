@@ -1,8 +1,8 @@
 package routes
 
 import (
-	"../controllers"
-	"github.com/gorilla/mux"
+	controllers "../controllers"
+	mux "github.com/gorilla/mux"
 )
 
 func Routers() (router *mux.Router) {
@@ -15,6 +15,6 @@ func Routers() (router *mux.Router) {
 	router.HandleFunc("/player/{id}", controllers.GetPlayerById).Methods("GET")
 	router.HandleFunc("/player/{id}", controllers.DeletePlayer).Methods("DELETE")
 	router.HandleFunc("/player/{id}", controllers.UpdatePlayer).Methods("PUT")
-
 	return
+
 }

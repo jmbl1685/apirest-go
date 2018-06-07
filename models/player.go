@@ -7,5 +7,5 @@ type Player struct {
 	Position    string `json:"position"`
 	Dorsal      int    `json:"dorsal"`
 	Nationality string `json:"nationality"`
-	ImageUrl    string `json:"image"`
+	Image       string `json:"image"`
 }

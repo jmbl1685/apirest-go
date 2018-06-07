@@ -6,7 +6,7 @@ import (
 
 	config "../config"
 	models "../models"
-	"github.com/gorilla/mux"
+	mux "github.com/gorilla/mux"
 	shortid "github.com/jasonsoft/go-short-id"
 	bson "gopkg.in/mgo.v2/bson"
 )
@@ -57,6 +57,17 @@ func UpdatePlayer(w http.ResponseWriter, r *http.Request) {
 	var player models.Player
 	params := mux.Vars(r)
 	w.Header().Set("Content-Type", "application/json")
-	config.Mongo().Update(bson.M{"id": params["id"]}, bson.M{})
-	json.NewEncoder(w).Encode(player)
+	_ = json.NewDecoder(r.Body).Decode(&player)
+
+	body := bson.M{
+		"id":          params["id"],
+		"name":        player.Name,
+		"team":        player.Team,
+		"position":    player.Position,
+		"nationality": player.Nationality,
+		"image":       player.Image,
+		"dorsal":      player.Dorsal,
+	}
+	config.Mongo().Update(bson.M{"id": params["id"]}, body)
+	json.NewEncoder(w).Encode(body)
 }

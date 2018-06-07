@@ -1,12 +1,12 @@
 package main
 
 import (
-	"log"
-	"net/http"
+	log "log"
+	http "net/http"
 
-	"./config"
-	"./routes"
-	"github.com/rs/cors"
+	config "./config"
+	routes "./routes"
+	cors "github.com/rs/cors"
 )
 
 func main() {
