@@ -2,29 +2,23 @@ package controllers
 
 import (
 	json "encoding/json"
+	"fmt"
 	http "net/http"
 
 	config "../config"
 	models "../models"
+	utilities "../utilities"
 	mux "github.com/gorilla/mux"
-	shortid "github.com/jasonsoft/go-short-id"
 	bson "gopkg.in/mgo.v2/bson"
 )
 
 func AddPlayer(w http.ResponseWriter, r *http.Request) {
 
 	var player models.Player
-
-	opt := shortid.Options{
-		Number:        14,
-		StartWithYear: true,
-		EndWithHost:   false,
-	}
+	player.Id = utilities.GenerateId()
 
 	w.Header().Set("Content-Type", "application/json")
 	_ = json.NewDecoder(r.Body).Decode(&player)
-
-	player.Id = shortid.Generate(opt)
 	config.Mongo().Insert(player)
 	json.NewEncoder(w).Encode(player)
 
@@ -34,7 +28,15 @@ func GetPlayer(w http.ResponseWriter, r *http.Request) {
 	var players []models.Player
 	w.Header().Set("Content-Type", "application/json")
 	config.Mongo().Find(nil).All(&players)
-	json.NewEncoder(w).Encode(players)
+	fmt.Print(len(players))
+
+	if len(players) == 0 {
+		json.NewEncoder(w).Encode(
+			utilities.Response{Message: "There are not players", Status: 404})
+	} else {
+		json.NewEncoder(w).Encode(players)
+	}
+
 }
 
 func GetPlayerById(w http.ResponseWriter, r *http.Request) {
@@ -42,7 +44,13 @@ func GetPlayerById(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
 	w.Header().Set("Content-Type", "application/json")
 	config.Mongo().Find(bson.M{"id": params["id"]}).One(&player)
-	json.NewEncoder(w).Encode(player)
+
+	if player.Id == "" {
+		json.NewEncoder(w).Encode(
+			utilities.Response{Message: "Player not found", Status: 404})
+	} else {
+		json.NewEncoder(w).Encode(player)
+	}
 }
 
 func DeletePlayer(w http.ResponseWriter, r *http.Request) {

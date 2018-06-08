@@ -11,11 +11,11 @@ func GetPort() string {
 func Mongo() *mongodb.Collection {
 
 	const (
-		Host       = "ds046367.mlab.com:46367"
-		Username   = "root"
-		Password   = "12345"
-		Database   = "db-social-mean5"
-		Collection = "player"
+		Host       = "HOST_DB"
+		Username   = "USERNAME_DB"
+		Password   = "PASSWORD_DB"
+		Database   = "DATABASE_DB"
+		Collection = "COLLECTION_DB"
 	)
 
 	session, err := mongodb.DialWithInfo(&mongodb.DialInfo{
